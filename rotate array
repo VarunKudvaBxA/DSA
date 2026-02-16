@@ -1,0 +1,19 @@
+three reverse calls: from 0 to n-1, 0 to k-1, k to n-1
+
+class Solution {
+    public void rotate(int[] nums, int k) {
+        k=k%nums.length;
+        rev(nums,0,nums.length-1);
+        rev(nums,0,k-1);
+        rev(nums,k,nums.length-1);
+    }
+    private void rev(int[] nums,int st, int end){
+        while(st<end){
+            int temp=nums[st];
+            nums[st]=nums[end];
+            nums[end]=temp;
+            st++;
+            end--;
+        }
+    }
+}
