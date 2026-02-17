@@ -1,0 +1,20 @@
+class Solution {
+    public int trap(int[] height) {
+        int n=height.length;
+        int[] l=new int[n];
+        int[] r=new int[n];
+        int sum=0;
+        l[0]=height[0];
+        r[n-1]=height[n-1];
+        for(int i=1;i<height.length;i++){
+            l[i]=Math.max(l[i-1],height[i]);
+        }
+        for(int j=n-2;j>=0;j--){
+            r[j]=Math.max(height[j],r[j+1]);
+        }
+        for(int k=0;k<n;k++){
+            sum+=Math.min(l[k],r[k])-height[k];           
+        }
+        return sum;
+    }
+}
