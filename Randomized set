@@ -1,0 +1,30 @@
+class RandomizedSet {
+    private Map<Integer, Integer>m;
+    private List<Integer> l;
+    private Random r;
+    public RandomizedSet() {
+        m=new HashMap<>();
+        l=new ArrayList<>();
+        r=new Random();
+    }
+    public boolean insert(int val) {
+        if(m.containsKey(val)) return false;
+        m.put(val, l.size());
+        l.add(val);
+        return true;   
+    }
+
+    public boolean remove(int val) {
+        if(!m.containsKey(val)) return false;
+        int ind=m.get(val);
+        int last=l.get(l.size()-1);
+        l.set(ind,last);
+        m.put(last, ind);
+        l.remove(l.size()-1);
+        m.remove(val);
+        return true;}
+    
+    public int getRandom() {
+        return l.get(r.nextInt(l.size()));
+    }
+}
