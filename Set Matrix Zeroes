@@ -1,0 +1,23 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int m=matrix.length;
+        int n=matrix[0].length;
+        boolean[] rm=new boolean[m];
+        boolean[] cm=new boolean[n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j]==0){
+                    rm[i]=true;
+                    cm[j]=true;
+                }
+            }
+        }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(rm[i]||cm[j]){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+    }
+}
