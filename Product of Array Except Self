@@ -1,0 +1,19 @@
+answer[i] = product of all elements of nums except nums[i]. product of all elements before i  ×  product of all elements after i. 
+For each index, I compute the product of all elements to its left and to its right. I first store prefix products in the result array, then traverse backward maintaining a suffix product and multiply it with the prefix value. This gives O(n) time and O(1) extra space
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        result[0] = 1;
+        for (int i = 1; i < n; i++) {
+            result[i] = result[i - 1] * nums[i - 1];
+        }
+        int suffix = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            result[i] *= suffix;
+            suffix *= nums[i];
+        }
+        return result;
+    }
+}
