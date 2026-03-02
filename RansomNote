@@ -1,0 +1,21 @@
+Given two strings:ransomNote and magazine. Return true if you can construct ransomNote using the letters in magazine.
+Each letter in magazine can only be used once. All letters are lowercase English letters.
+
+Approach: Frequency Counting
+Since letters can only be used once, we must count how many times each character appears in magazine.
+For each character in ransomNote, check if it exists in the counted frequencies.
+If yes → decrease its count. If at any point the count becomes negative → return false.
+If we finish checking → return true.
+
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) {
+            return false;}
+        int[] count = new int[26];
+        for (char c : magazine.toCharArray()) {
+            count[c - 'a']++;}
+        for (char c : ransomNote.toCharArray()) {
+            count[c - 'a']--;
+            if (count[c - 'a'] < 0) {
+                return false;}}
+        return true;}}
