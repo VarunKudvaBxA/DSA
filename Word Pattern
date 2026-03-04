@@ -1,0 +1,22 @@
+Instead of maintaining two separate maps, we use one HashMap<Object, Integer>.
+Object because we will store: Character (from pattern), String (word from s) as keys in the same map.
+
+For every index i: We store the last seen index of: pattern.charAt(i) words[i]
+If the previous index of both is not the same → pattern mismatch.
+This works because:
+If two pattern characters map to the same word, their previous indices will conflict.
+If one character maps to two different words, indices will differ.
+
+class Solution {
+    public boolean wordPattern(String pattern, String s) {
+        String[] words = s.split(" ");
+        if (pattern.length() != words.length) return false;
+        Map<Object, Integer> map = new HashMap<>();
+        for (int i = 0; i < words.length; i++) {
+            char ch = pattern.charAt(i);
+            String word = words[i];
+            Integer charPrev = map.put(ch, i);
+            Integer wordPrev = map.put(word, i);
+            if (!Objects.equals(charPrev, wordPrev)){
+                return false;}}
+        return true;}}
